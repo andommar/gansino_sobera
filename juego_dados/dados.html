@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <link rel="stylesheet" type="text/css" href="style_dado.css">
+    <script src="dados.js"></script> 
+</head>
+
+<body>
+
+    <span><b>Dinero jugador:</b><div id="dinero_jugador" class="dinero">100</div></span>
+    <span><b>Dinero maquina:</b><div id="dinero_maquina" class="dinero">100</div></span>
+    <div id="die1" class="dice">0</div>
+    <div id="die2" class="dice">0</div>
+    <div id="die3" class="dice">0</div>
+    <div id="die4" class="dice">0</div>
+    <div id="die5" class="dice">0</div>
+ 
+    <div id="area_info">
+            <span>Introduce tu apuesta:  <input type="number" id="apuesta" value="5€"></span>
+            <br>
+            <span id="texto"></span>
+    </div>
+    
+    <button onclick="tirarDado()">Tirar dado</button>
+    <h2 id="status" style="clear:left;"></h2>
+</body>
+
+</html>
