@@ -1,13 +1,70 @@
+
 var dinero_jugador = 100;
 var dinero_maquina = 100;
+
+var dinero_j =document.getElementById("dinero_jugador");
+var dinero_m =document.getElementById("dinero_maquina");
+
+
+
+
+
+function CargarSaldo()
+{
+    dinero_j.innerHTML = dinero_jugador;
+    dinero_m.innerHTML = dinero_maquina;
+}
+
+
+
+function Partida()
+{
+
+    var apuesta = document.getElementById("apuesta").value;
+
+    if(apuesta<dinero_jugador || apuesta>dinero_jugador)
+        this.MensajeApuesta()
+
+
+
+
+    this.MensageAlerta();
+
+    //
+    
+    if(dinero_jugador>0 && dinero_maquina>0)
+    {
+
+    }
+    else
+    {
+        if (dinero_jugador<0)
+        {
+
+        }
+        else (dinero_maquina<0)
+        {
+
+        }
+    }
+    
+}
+
 var i,j,n;
 
 
 var veces_repetido = 0;
 
 var combinatoria_jugador=-1;
+var combinatoria=0;
 
 function tirarDado(){
+
+    
+
+
+
+    this.Tirada();
 
     //var apuesta = document.getElementById("apuesta");
     var texto = document.getElementById("texto");
@@ -87,7 +144,7 @@ function tirarDado(){
         var valores_dados_copia=[d1,d2,d3,d4,d5];
         var repeticiones = [];
         var estado=status;
-        var combinatoria=0;
+        
 
 
         for(n=0;n<2;n++)
@@ -151,7 +208,7 @@ function tirarDado(){
                 combinatoria = 6; //6. Full House — Pair of one value and Three-of-a-Kind of another.
                 estado.innerHTML = "Full House";
             }
-            else if(diceTotal==20 )
+            else if(diceTotal==20)
             {
                 var bandera = true;
 
@@ -253,12 +310,36 @@ function tirarDado(){
         texto.innerHTML = "La apuesta no puede ser inferior a "+ dinero_jugador;
     }
            
+}
 
+function MensajeAlerta(){
+    swal({
+        title: "¡Has perdido!",
+        text: "¿Quieres volver a jugar?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+}
 
+function MensajeApuesta(){
+    Swal.fire({
+    type: 'error',
+    title: 'Oops...',
+    text: '¡No tienes ese dinero!',
+    })
+} 
 
-
-
-
-
-
+function Tirada()
+{
+    console.log("Hola");
 }
