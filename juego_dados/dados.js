@@ -22,16 +22,6 @@ function Partida()
 
     var apuesta = document.getElementById("apuesta").value;
 
-    if(apuesta<dinero_jugador || apuesta>dinero_jugador)
-        this.MensajeApuesta()
-
-
-
-
-    this.MensageAlerta();
-
-    //
-    
     if(dinero_jugador>0 && dinero_maquina>0)
     {
 
@@ -47,6 +37,20 @@ function Partida()
 
         }
     }
+
+    if(apuesta<dinero_jugador || apuesta>dinero_jugador)
+        this.MensajeApuesta()
+    else
+
+
+
+
+
+    this.MensageAlerta();
+
+    //
+    
+
     
 }
 
