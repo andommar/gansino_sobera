@@ -24,15 +24,15 @@ function Partida()
 
     if(dinero_jugador>0 && dinero_maquina>0)
     {
-
+        this.tirarDado();
     }
     else
     {
-        if (dinero_jugador<0)
+        if (dinero_jugador<=0)
         {
 
         }
-        else (dinero_maquina<0)
+        else (dinero_maquina<=0)
         {
 
         }
