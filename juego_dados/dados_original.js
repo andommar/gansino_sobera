@@ -1,34 +1,24 @@
 
-var dinero_jugador = parseInt(100);
-var dinero_maquina = parseInt(100);
+var dinero_jugador = 100;
+var dinero_maquina = 100;
 
 var dinero_j =document.getElementById("dinero_jugador");
 var dinero_m =document.getElementById("dinero_maquina");
 
-var bote=parseInt(0);
 
-var combinatoria_jugador=-1;
-var combinatoria=0;
-var combinatoria_maquina=-1;
+
 
 
 function CargarSaldo()
 {
     dinero_j.innerHTML = dinero_jugador;
     dinero_m.innerHTML = dinero_maquina;
-
-
-
-    
 }
 
 
 
 function Partida()
 {
-
-    console.log("Dinero jugadpr:"+dinero_jugador);
-    console.log("Dinero maquina:"+dinero_maquina);
 
     if(dinero_jugador>0 && dinero_maquina>0)
     {
@@ -60,15 +50,13 @@ var i,j,n;
 
 var veces_repetido = 0;
 
-
+var combinatoria_jugador=-1;
+var combinatoria=0;
 
 function tirarDado(){
 
     
-    //var apuesta = document.getElementById("apuesta");
     var texto = document.getElementById("texto");
-
-
         
         //jugador     
         var die1 = document.getElementById("die1");
@@ -296,18 +284,9 @@ function tirarDado(){
                  
             estado = status2;
 
-            if(n==0)
-                combinatoria_jugador=combinatoria;
-            else if(n==1)
-                combinatoria_maquina=combinatoria;
-
-                console.log("Combinatoria jugador:"+combinatoria_jugador);
-                console.log("Combinatoria maquina:"+combinatoria_maquina);
-
         }
-    
-        this.GanarRonda();
-        bote = 0;   
+        
+           
 }
 
 function MensajeAlerta(){
@@ -341,43 +320,9 @@ function ComprobarApuesta()
 {
     var valor_apuesta = document.getElementById("apuesta").value;
 
-    var apuesta_maquina = parseInt(10);
-
 
     if(valor_apuesta<dinero_jugador && valor_apuesta>0)
-    {
-        bote = parseInt(valor_apuesta);
-        bote = parseInt(bote+apuesta_maquina);
-        dinero_maquina = parseInt(dinero_maquina-apuesta_maquina);
-        console.log(dinero_maquina);
-        console.log(bote);
         return true;
-    }
     else
         return false;
 }
-
-function GanarRonda()
-{
-    if(combinatoria_jugador>combinatoria_maquina)
-        {
-            dinero_jugador = parseInt(dinero_jugador+bote);
-            console.log("Dinero jugador:"+dinero_jugador);
-        }
-
-    else
-        {
-            dinero_maquina = parseInt(dinero_maquina+bote);
-            console.log("Dinero maquina:"+dinero_maquina);
-        }
-
-
-}
-
-function MensajeApuesta(){
-    swal({
-        title: "Good job!",
-        text: "Ha ganado jugador",
-        icon: "success",
-      });
-} 
