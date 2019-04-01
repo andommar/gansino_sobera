@@ -1,34 +1,29 @@
 
-var dinero_jugador = parseInt(100);
-var dinero_maquina = parseInt(100);
+var dinero_jugador = 100;
+var dinero_maquina = 100;
+
+//combinatoria
+var combinatoria_jugador=-1;
+var combinatoria=0;
+
+
+// Valor bote
+var bote=parseInt(0);
 
 var dinero_j =document.getElementById("dinero_jugador");
 var dinero_m =document.getElementById("dinero_maquina");
+var bote_display = document.getElementById("bote");
 
-var bote=parseInt(0);
+//copiamos valores al html
+dinero_j.innerHTML = dinero_jugador;
+dinero_m.innerHTML = dinero_maquina;
+bote_display.innerHTML = bote;
 
-var combinatoria_jugador=-1;
-var combinatoria=0;
-var combinatoria_maquina=-1;
-
-
-function CargarSaldo()
-{
-    dinero_j.innerHTML = dinero_jugador;
-    dinero_m.innerHTML = dinero_maquina;
-
-
-
-    
-}
 
 
 
 function Partida()
 {
-
-    console.log("Dinero jugadpr:"+dinero_jugador);
-    console.log("Dinero maquina:"+dinero_maquina);
 
     if(dinero_jugador>0 && dinero_maquina>0)
     {
@@ -52,23 +47,19 @@ function Partida()
         }
     }  
 
-    
 }
-
-var i,j,n;
-
-
-var veces_repetido = 0;
 
 
 
 function tirarDado(){
 
+    var i,j,n;
+
+
+    var veces_repetido = 0;
+
     
-    //var apuesta = document.getElementById("apuesta");
     var texto = document.getElementById("texto");
-
-
         
         //jugador     
         var die1 = document.getElementById("die1");
@@ -290,24 +281,20 @@ function tirarDado(){
 
 
             //reemplazamos los dados del jugador por los de la maquina para hacer la 2a vuelta
-
             var valores_dados=[d6,d7,d8,d9,d10];
             var valores_dados_copia=[d6,d7,d8,d9,d10];
                  
             estado = status2;
 
             if(n==0)
-                combinatoria_jugador=combinatoria;
-            else if(n==1)
-                combinatoria_maquina=combinatoria;
+                combinatoria_jugador= combinatoria;        
+            
+            this.ComprobarCombinatoria();
 
-                console.log("Combinatoria jugador:"+combinatoria_jugador);
-                console.log("Combinatoria maquina:"+combinatoria_maquina);
 
         }
-    
-        this.GanarRonda();
-        bote = 0;   
+        
+           
 }
 
 function MensajeAlerta(){
@@ -341,43 +328,50 @@ function ComprobarApuesta()
 {
     var valor_apuesta = document.getElementById("apuesta").value;
 
-    var apuesta_maquina = parseInt(10);
-
 
     if(valor_apuesta<dinero_jugador && valor_apuesta>0)
-    {
-        bote = parseInt(valor_apuesta);
-        bote = parseInt(bote+apuesta_maquina);
-        dinero_maquina = parseInt(dinero_maquina-apuesta_maquina);
-        console.log(dinero_maquina);
-        console.log(bote);
         return true;
-    }
     else
         return false;
 }
 
-function GanarRonda()
+function ComprobarCombinatoria()
 {
-    if(combinatoria_jugador>combinatoria_maquina)
-        {
-            dinero_jugador = parseInt(dinero_jugador+bote);
-            console.log("Dinero jugador:"+dinero_jugador);
-        }
-
+    var opcion = 0;
+    if(combinatoria_jugador>combinatoria)
+        opcion = 0;
+    else if (combinatoria_jugador==combinatoria)
+        opcion = 1;
     else
-        {
-            dinero_maquina = parseInt(dinero_maquina+bote);
-            console.log("Dinero maquina:"+dinero_maquina);
-        }
+        opcion = 2;
 
+    this.MensajeGanador(opcion);
 
 }
 
-function MensajeApuesta(){
-    swal({
-        title: "Good job!",
-        text: "Ha ganado jugador",
+function MensajeGanador(opcion){
+
+    switch (opcion) {
+      case 0:
+        swal({
+            title: "Ganador jugador",
+            text: "You clicked the button!",
+            icon: "success",
+        });
+        break;
+      case 1:
+        swal({
+            title: "Empate",
+            text: "You clicked the button!",
+            icon: "success",
+            });
+        break;
+      default:
+      swal({
+        title: "Ganador maquina",
+        text: "You clicked the button!",
         icon: "success",
-      });
+        });
+    }
 } 
+

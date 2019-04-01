@@ -42,7 +42,6 @@ function Partida()
         }
     }  
 
-    
 }
 
 var i,j,n;
