@@ -1,6 +1,6 @@
 
-var dinero_jugador = 100;
-var dinero_maquina = 100;
+var dinero_jugador = parseInt(100);
+var dinero_maquina = parseInt(100);
 
 //combinatoria
 var combinatoria_jugador=-1;
@@ -10,8 +10,13 @@ var combinatoria=0;
 // Valor bote
 var bote=parseInt(0);
 
+//apuesta maquina
+var apuesta_maquina = parseInt(20);
+
+//valores
 var dinero_j =document.getElementById("dinero_jugador");
 var dinero_m =document.getElementById("dinero_maquina");
+
 var bote_display = document.getElementById("bote");
 
 //copiamos valores al html
@@ -20,17 +25,37 @@ dinero_m.innerHTML = dinero_maquina;
 bote_display.innerHTML = bote;
 
 
+//boton dados
+
+var b_dado1 = document.getElementById("b_dado1").disabled = true;
+var b_dado2 = document.getElementById("b_dado2").disabled = true;
+var b_dado3 = document.getElementById("b_dado3").disabled = true;
+var b_dado4 = document.getElementById("b_dado4").disabled = true;
+var b_dado5 = document.getElementById("b_dado5").disabled = true;
+
+
 
 
 function Partida()
 {
+    var valor_apuesta = parseInt(document.getElementById("apuesta").value);
+
+    var resultado=-1;
 
     if(dinero_jugador>0 && dinero_maquina>0)
     {
-        if(this.ComprobarApuesta()==true)
+        if(this.ComprobarApuesta(valor_apuesta)==true)
         {
+
+            dinero_jugador = parseInt(dinero_jugador-valor_apuesta);
+            dinero_maquina = parseInt(dinero_maquina-apuesta_maquina);
+            dinero_j.innerHTML = dinero_jugador;
+            dinero_m.innerHTML = dinero_maquina;
+            console.log(dinero_maquina-apuesta_maquina)
+            bote = parseInt(apuesta_maquina+valor_apuesta);
+            bote_display.innerHTML = bote;
             this.tirarDado();
-            console.log("yep");
+            
         }
         else
             this.MensajeApuesta();
@@ -39,12 +64,13 @@ function Partida()
     {
         if (dinero_jugador<=0)
         {
-            this.MensageAlerta();
+            resultado=0;
         }
         else (dinero_maquina<=0)
         {
-            this.MensageAlerta();
+            resultado=1;
         }
+        this.MensajeAlerta(resultado);
     }  
 
 }
@@ -53,7 +79,8 @@ function Partida()
 
 function tirarDado(){
 
-    var i,j,n;
+    var i,j,n,m;
+
 
 
     var veces_repetido = 0;
@@ -289,31 +316,29 @@ function tirarDado(){
             if(n==0)
                 combinatoria_jugador= combinatoria;        
             
-            this.ComprobarCombinatoria();
+
 
 
         }
         
+        this.ComprobarCombinatoria();
+        
            
 }
 
-function MensajeAlerta(){
-    swal({
-        title: "¡Has perdido!",
-        text: "¿Quieres volver a jugar?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-          });
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
+function MensajeAlerta(resultado){
+
+    switch(resultado){
+        case 0:
+        Swal.fire('Has perdido!');
+        break;
+
+        default:
+        Swal.fire('Has ganado!');
+
+
+    }
+
 }
 
 function MensajeApuesta(){
@@ -324,11 +349,8 @@ function MensajeApuesta(){
       });
 } 
 
-function ComprobarApuesta()
+function ComprobarApuesta(valor_apuesta)
 {
-    var valor_apuesta = document.getElementById("apuesta").value;
-
-
     if(valor_apuesta<dinero_jugador && valor_apuesta>0)
         return true;
     else
@@ -338,11 +360,11 @@ function ComprobarApuesta()
 function ComprobarCombinatoria()
 {
     var opcion = 0;
-    if(combinatoria_jugador>combinatoria)
+    if(combinatoria_jugador>combinatoria)//ganador jugador
         opcion = 0;
-    else if (combinatoria_jugador==combinatoria)
+    else if (combinatoria_jugador==combinatoria)//empate
         opcion = 1;
-    else
+    else //ganador maquina
         opcion = 2;
 
     this.MensajeGanador(opcion);
@@ -353,20 +375,47 @@ function MensajeGanador(opcion){
 
     switch (opcion) {
       case 0:
+      console.log("Antes de sumar bote"+dinero_jugador);
+      console.log("Bote antes de sumar bote"+bote);
+      dinero_jugador=dinero_jugador+bote;
+      console.log(dinero_jugador);
+      console.log(bote);
+      console.log(dinero_jugador+bote);
+      dinero_j.innerHTML = dinero_jugador;
+
+      bote = parseInt(0);
         swal({
             title: "Ganador jugador",
             text: "You clicked the button!",
             icon: "success",
         });
+
         break;
       case 1:
+
+      bote = parseInt(bote/2);
+      dinero_jugador=dinero_jugador+bote;
+      dinero_j.innerHTML = dinero_jugador;
+      dinero_maquina=dinero_maquina+bote;
+      dinero_m.innerHTML = dinero_maquina;
+      bote = parseInt(0);
         swal({
             title: "Empate",
             text: "You clicked the button!",
             icon: "success",
             });
+
+
+
         break;
       default:
+
+      dinero_maquina=dinero_maquina+bote;
+      console.log(dinero_maquina);
+      console.log(bote);
+      console.log(dinero_maquina+bote);
+      dinero_m.innerHTML = dinero_maquina;
+      bote = parseInt(0);
       swal({
         title: "Ganador maquina",
         text: "You clicked the button!",
