@@ -33,6 +33,9 @@ var b_dado3 = document.getElementById("b_dado3").disabled = true;
 var b_dado4 = document.getElementById("b_dado4").disabled = true;
 var b_dado5 = document.getElementById("b_dado5").disabled = true;
 
+var b_continuar= document.getElementById("cont").disabled = true;
+
+
 
 
 
@@ -78,6 +81,15 @@ function Partida()
 
 
 function tirarDado(){
+
+
+    document.getElementById("b_dado1").disabled = false;
+    document.getElementById("b_dado2").disabled = false;
+    document.getElementById("b_dado3").disabled = false;
+    document.getElementById("b_dado4").disabled = false;
+    document.getElementById("b_dado5").disabled = false;
+    
+    document.getElementById("cont").disabled = false;
 
     var i,j,n,m;
 
@@ -326,6 +338,8 @@ function tirarDado(){
            
 }
 
+
+
 function MensajeAlerta(resultado){
 
     switch(resultado){
@@ -342,11 +356,7 @@ function MensajeAlerta(resultado){
 }
 
 function MensajeApuesta(){
-    swal({
-        title: "Good job!",
-        text: "You clicked the button!",
-        icon: "success",
-      });
+    swal("No tienes ese dinero!");
 } 
 
 function ComprobarApuesta(valor_apuesta)
@@ -384,11 +394,7 @@ function MensajeGanador(opcion){
       dinero_j.innerHTML = dinero_jugador;
 
       bote = parseInt(0);
-        swal({
-            title: "Ganador jugador",
-            text: "You clicked the button!",
-            icon: "success",
-        });
+      swal("Has ganado!");
 
         break;
       case 1:
@@ -399,11 +405,7 @@ function MensajeGanador(opcion){
       dinero_maquina=dinero_maquina+bote;
       dinero_m.innerHTML = dinero_maquina;
       bote = parseInt(0);
-        swal({
-            title: "Empate",
-            text: "You clicked the button!",
-            icon: "success",
-            });
+        swal("Empate");
 
 
 
@@ -416,11 +418,13 @@ function MensajeGanador(opcion){
       console.log(dinero_maquina+bote);
       dinero_m.innerHTML = dinero_maquina;
       bote = parseInt(0);
-      swal({
-        title: "Ganador maquina",
-        text: "You clicked the button!",
-        icon: "success",
-        });
+      swal("Has perdido!");
     }
 } 
+
+
+function Dado1Guardado()
+{
+    document.getElementById("die1").value;
+}
 
